@@ -60,33 +60,27 @@ jobs:
         with:
           gradle-version: ${{ steps.gv.outputs.version }}
 
-      # Tengeneza wrapper kwenye folda tupu (haisomi mradi wako)
-      - name: 🔧 Generate Gradle Wrapper
-        run: |
-          if [ -f gradle/wrapper/gradle-wrapper.jar ]; then
-            echo "Wrapper tayari ipo, inaruka" | tee logs/01-wrapper.log
-          else
-            TMP=$(mktemp -d)
-            (cd "$TMP" && gradle wrapper --gradle-version "${{ steps.gv.outputs.version }}" --console=plain) 2>&1 | tee logs/01-wrapper.log
-            cp -r "$TMP/gradle" .
-            cp "$TMP/gradlew" "$TMP/gradlew.bat" .
-          fi
-          chmod +x gradlew
-
-      - name: 🔍 Verify Gradle Wrapper
+      - name: 🔍 Verify Gradle
         run: |
           {
-            echo "=== Gradle Wrapper ==="
-            ls -lah gradle/wrapper/
             echo "=== Gradle Version ==="
-            ./gradlew --version
+            gradle --version
+            echo "=== Java ==="
+            java -version
           } 2>&1 | tee logs/02-verify.log
 
       - name: 🔨 Build Debug APK
         run: |
-          ./gradlew assembleDebug \
-            --stacktrace --info --console=plain \
-            2>&1 | tee logs/03-build-full.log
+          if [ -x ./gradlew ] && [ -f gradle/wrapper/gradle-wrapper.jar ]; then
+            CMD=./gradlew
+          else
+            CMD=gradle
+          fi
+          echo "Inatumia: $CMD" | tee logs/03-build-full.log
+          $CMD assembleDebug --stacktrace --info --console=plain \
+            2>&1 | tee -a logs/03-build-full.log
+
+      # ---- Hatua zifuatazo zinaendeshwa hata build ikifeli ----
 
       - name: 🚨 Extract error logs
         if: always()
