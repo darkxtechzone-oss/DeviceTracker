@@ -1,1 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="32dp"
+    android:background="#0D1117">
 
+    <!-- Ikoni -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="📡"
+        android:textSize="72sp"
+        android:layout_marginBottom="24dp" />
+
+    <!-- Jina la App -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Device Tracker"
+        android:textColor="#FFFFFF"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Maelezo mafupi -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fuatilia simu yako uliyoisahau nyumbani"
+        android:textColor="#8B949E"
+        android:textSize="15sp"
+        android:gravity="center"
+        android:layout_marginBottom="64dp" />
+
+    <!-- Kitufe cha START -->
+    <Button
+        android:id="@+id/btnStart"
+        android:layout_width="220dp"
+        android:layout_height="60dp"
+        android:text="▶  START"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#238636"
+        android:letterSpacing="0.1" />
+
+</LinearLayout>

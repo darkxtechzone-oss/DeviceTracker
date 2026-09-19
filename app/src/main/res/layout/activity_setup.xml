@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0D1117">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <!-- Kichwa -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="⚙️ Mipangilio"
+            android:textColor="#FFFFFF"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="4dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Weka taarifa za Telegram Bot yako"
+            android:textColor="#8B949E"
+            android:textSize="14sp"
+            android:layout_marginBottom="20dp" />
+
+        <!-- ===== KADI YA ONYO ===== -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#1C2128"
+            android:padding="16dp"
+            android:layout_marginBottom="24dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="⚠️  TAARIFA KWA MTUMIAJI WA SIMU HII"
+                android:textColor="#F0883E"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="10dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#C9D1D9"
+                android:textSize="13sp"
+                android:lineSpacingMultiplier="1.5"
+                android:text="App hii inafuatilia simu hii kwa:\n\n📍 Mahali (Location) — kila dakika 15\n🔋 Hali ya betri — ripoti na tahadhari\n📵 Simu zilizokosekana — nambari na muda\n\nArifa ya ufuatiliaji inaonekana daima juu ya skrini na haiwezi kufutwa.\n\nApp hii inapaswa kutumika kwenye SIMU YAKO MWENYEWE TU." />
+        </LinearLayout>
+
+        <!-- ===== TOKEN ===== -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Telegram Bot Token"
+            android:textColor="#C9D1D9"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="6dp" />
+
+        <EditText
+            android:id="@+id/etToken"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:hint="123456789:ABCdefGHI..."
+            android:hintTextColor="#4A5568"
+            android:textColor="#FFFFFF"
+            android:textSize="13sp"
+            android:background="#161B22"
+            android:paddingHorizontal="14dp"
+            android:inputType="text"
+            android:layout_marginBottom="16dp" />
+
+        <!-- ===== CHAT ID ===== -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Telegram Chat ID"
+            android:textColor="#C9D1D9"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="6dp" />
+
+        <EditText
+            android:id="@+id/etChatId"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:hint="-1001234567890 au 987654321"
+            android:hintTextColor="#4A5568"
+            android:textColor="#FFFFFF"
+            android:textSize="13sp"
+            android:background="#161B22"
+            android:paddingHorizontal="14dp"
+            android:inputType="text"
+            android:layout_marginBottom="24dp" />
+
+        <!-- ===== HALI ===== -->
+        <TextView
+            android:id="@+id/tvStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hali: 🔴 Imesimama"
+            android:textColor="#8B949E"
+            android:textSize="14sp"
+            android:layout_marginBottom="16dp" />
+
+        <!-- ===== VITUFE ===== -->
+
+        <!-- Jaribu muunganisho -->
+        <Button
+            android:id="@+id/btnTest"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:text="🔗 Jaribu Muunganisho"
+            android:textSize="15sp"
+            android:backgroundTint="#1F6FEB"
+            android:textColor="#FFFFFF"
+            android:layout_marginBottom="10dp" />
+
+        <!-- Washa -->
+        <Button
+            android:id="@+id/btnActivate"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="✅  WASHA UFUATILIAJI"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:backgroundTint="#238636"
+            android:textColor="#FFFFFF"
+            android:layout_marginBottom="10dp" />
+
+        <!-- Simamisha -->
+        <Button
+            android:id="@+id/btnStop"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:text="🛑  SIMAMISHA"
+            android:textSize="15sp"
+            android:backgroundTint="#6E1B1B"
+            android:textColor="#FFFFFF"
+            android:enabled="false" />
+
+    </LinearLayout>
+</ScrollView>
