@@ -1,0 +1,60 @@
+name: 🏗️ Build DeviceTracker APK
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:   # Ruhusu kuanzisha mkono
+
+jobs:
+  build:
+    name: Build APK
+    runs-on: ubuntu-latest
+
+    steps:
+
+      # 1. Pakua msimbo wa repo
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Sanidi Java 17 (inahitajika na AGP 8.x)
+      - name: ☕ Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: gradle
+
+      # 3. Hifadhi cache ya Gradle (inaharakisha build inayofuata)
+      - name: 📦 Cache Gradle
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      # 4. Ruhusa ya kutekeleza gradlew (muhimu kwa Linux)
+      - name: 🔑 Make gradlew executable
+        run: chmod +x gradlew
+
+      # 5. Jenga APK ya Debug
+      - name: 🔨 Build Debug APK
+        run: ./gradlew assembleDebug --stacktrace
+
+      # 6. Pakia APK kama artifact ya GitHub
+      - name: 🚀 Upload Debug APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: DeviceTracker-debug-${{ github.run_number }}
+          path: app/build/outputs/apk/debug/*.apk
+          retention-days: 14    # Hifadhi kwa siku 14
+
+      # (Hiari) Onyesha ukubwa wa APK
+      - name: 📊 APK Info
+        run: |
+          echo "=== APK iliyotengenezwa ==="
+          find app/build/outputs/apk/debug -name "*.apk" -exec ls -lh {} \;
