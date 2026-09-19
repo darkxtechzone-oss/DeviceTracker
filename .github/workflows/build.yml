@@ -5,7 +5,7 @@ on:
     branches: [ main, master ]
   pull_request:
     branches: [ main, master ]
-  workflow_dispatch:   # Ruhusu kuanzisha mkono
+  workflow_dispatch:
 
 jobs:
   build:
@@ -14,11 +14,11 @@ jobs:
 
     steps:
 
-      # 1. Pakua msimbo wa repo
+      # 1. Checkout repo
       - name: 📥 Checkout code
         uses: actions/checkout@v4
 
-      # 2. Sanidi Java 17 (inahitajika na AGP 8.x)
+      # 2. Java 17
       - name: ☕ Set up JDK 17
         uses: actions/setup-java@v4
         with:
@@ -26,35 +26,40 @@ jobs:
           distribution: 'temurin'
           cache: gradle
 
-      # 3. Hifadhi cache ya Gradle (inaharakisha build inayofuata)
-      - name: 📦 Cache Gradle
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-
+      # 3. Install Gradle
+      - name: ⚙️ Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
 
-      # 4. Ruhusa ya kutekeleza gradlew (muhimu kwa Linux)
-      - name: 🔑 Make gradlew executable
-        run: chmod +x gradlew
+      # 4. Automatically create Gradle Wrapper
+      - name: 🔧 Generate Gradle Wrapper
+        run: |
+          gradle wrapper
+          chmod +x gradlew
 
-      # 5. Jenga APK ya Debug
+      # 5. Verify wrapper
+      - name: 🔍 Verify Gradle Wrapper
+        run: |
+          echo "=== Gradle Wrapper ==="
+          ls -lah gradle/wrapper/
+          echo "=== Gradle Version ==="
+          ./gradlew --version
+
+      # 6. Build Debug APK
       - name: 🔨 Build Debug APK
         run: ./gradlew assembleDebug --stacktrace
 
-      # 6. Pakia APK kama artifact ya GitHub
+      # 7. Upload APK
       - name: 🚀 Upload Debug APK
         uses: actions/upload-artifact@v4
         with:
           name: DeviceTracker-debug-${{ github.run_number }}
           path: app/build/outputs/apk/debug/*.apk
-          retention-days: 14    # Hifadhi kwa siku 14
+          retention-days: 14
 
-      # (Hiari) Onyesha ukubwa wa APK
+      # 8. APK Info
       - name: 📊 APK Info
         run: |
           echo "=== APK iliyotengenezwa ==="
-          find app/build/outputs/apk/debug -name "*.apk" -exec ls -lh {} \;
+          find app/build/outputs/apk/debug \
+            -name "*.apk" \
+            -exec ls -lh {} \;
