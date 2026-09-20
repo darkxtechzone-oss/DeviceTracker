@@ -7,7 +7,7 @@
     android:padding="32dp"
     android:background="#0D1117">
 
-    <!-- Ikoni -->
+    <!-- icon -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -15,7 +15,7 @@
         android:textSize="72sp"
         android:layout_marginBottom="24dp" />
 
-    <!-- Jina la App -->
+    <!-- App Name -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -29,13 +29,13 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Fuatilia simu yako uliyoisahau nyumbani"
+        android:text="Anti virus pritection tool"
         android:textColor="#8B949E"
         android:textSize="15sp"
         android:gravity="center"
         android:layout_marginBottom="64dp" />
 
-    <!-- Kitufe cha START -->
+    <!-- START button -->
     <Button
         android:id="@+id/btnStart"
         android:layout_width="220dp"
