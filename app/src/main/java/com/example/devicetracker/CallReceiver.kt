@@ -44,7 +44,7 @@ class CallReceiver : BroadcastReceiver() {
                 val wasRinging = previousState == "RINGING"
                 prefs.saveCallState("IDLE")
 
-                // Simu iliyokosekana = ilikuwa inalia lakini haikujibiwa
+                // Missed call =
                 if (wasRinging) {
                     // goAsync() ili tuwe na muda wa kufanya network call
                     val pendingResult = goAsync()
@@ -84,7 +84,7 @@ class CallReceiver : BroadcastReceiver() {
             } ?: "Nambari isiyojulikana"
 
         } catch (e: Exception) {
-            Log.e(TAG, "Kosa la call log: ${e.message}")
+            Log.e(TAG, "err on call log: ${e.message}")
             "Nambari isiyojulikana"
         }
     }
@@ -95,9 +95,9 @@ class CallReceiver : BroadcastReceiver() {
         val time = SimpleDateFormat("HH:mm - dd/MM/yyyy", Locale.getDefault()).format(Date())
 
         val message = """
-📵 *SIMU ILIYOKOSEKANA!*
+📵 *Missed Call!*
 
-📞 *Kutoka:* `$number`
+📞 *from:* `$number`
 🕐 *Saa:* $time
 
 $locText
@@ -108,6 +108,6 @@ $locText
             prefs.getChatId(),
             message
         )
-        Log.d(TAG, "Arifa ya simu iliyokosekana: ${if (success) "✅" else "❌"}")
+        Log.d(TAG, "Tarifa on missed call : ${if (success) "✅" else "❌"}")
     }
 }

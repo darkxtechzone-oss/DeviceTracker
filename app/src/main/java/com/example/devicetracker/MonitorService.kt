@@ -38,7 +38,7 @@ class MonitorService : Service() {
             val isCharging = intent.getIntExtra(BatteryManager.EXTRA_STATUS, -1) ==
                     BatteryManager.BATTERY_STATUS_CHARGING
 
-            // Tuma arifa maalum betri chini ya 15%
+            // Tuma Tarifa maalum betri chini ya 15%
             if (batteryPct <= 15 && !isCharging && !prefs.isLowBatteryAlertSent()) {
                 prefs.setLowBatteryAlertSent(true)
                 scope.launch {
@@ -68,7 +68,7 @@ class MonitorService : Service() {
         registerBatteryReceiver()
         startLocationUpdates()
 
-        Log.d(TAG, "Service imeanza")
+        Log.d(TAG, "Service Started")
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -120,9 +120,9 @@ class MonitorService : Service() {
         val time = SimpleDateFormat("HH:mm - dd/MM/yyyy", Locale.getDefault()).format(Date())
 
         val message = """
-📊 *Ripoti ya Simu*
+📊 *Phone report*
 
-📍 [Angalia Mahali Kwenye Ramani]($mapLink)
+📍 [Check Location on Mapi]($mapLink)
 
 $chargeIcon *Betri:* $batteryLevel% ($chargeText)
 
@@ -137,7 +137,7 @@ $chargeIcon *Betri:* $batteryLevel% ($chargeText)
         val locText = prefs.getLastLocationText()
         val time = SimpleDateFormat("HH:mm - dd/MM/yyyy", Locale.getDefault()).format(Date())
         return """
-⚠️ *BETRI CHINI - TAHADHARI!*
+⚠️ *LOW BATERY - ☣️!*
 
 🔋 Betri imebaki *$level%* na haichajiwi!
 
@@ -155,7 +155,7 @@ $locText
                 "Device Tracker",
                 NotificationManager.IMPORTANCE_LOW
             ).apply {
-                description = "⚠️ Simu hii inafuatiliwa - Gonga kwa maelezo zaidi"
+                description = "⚠️ Ant theft protection - Your phone is Safe"
                 setShowBadge(false)
             }
             val manager = getSystemService(NotificationManager::class.java)
@@ -171,8 +171,8 @@ $locText
         )
 
         return NotificationCompat.Builder(this, CHANNEL_ID)
-            .setContentTitle("📡 Device Tracker Inafanya Kazi")
-            .setContentText("⚠️ Simu hii inafuatiliwa. Gonga kwa maelezo.")
+            .setContentTitle("📡 Device Tracker Is working")
+            .setContentText("⚠️ Ant theft protection. Your phone is safe.")
             .setSmallIcon(android.R.drawable.ic_menu_mylocation)
             .setPriority(NotificationCompat.PRIORITY_LOW)
             .setOngoing(true) // Haiwezi kufutwa na user
@@ -195,7 +195,7 @@ $locText
             Log.e(TAG, "Error on destroy: ${e.message}")
         }
         prefs.setServiceRunning(false)
-        Log.d(TAG, "Service imesimama")
+        Log.d(TAG, "ServicStopped")
     }
 
     override fun onBind(intent: Intent?): IBinder? = null

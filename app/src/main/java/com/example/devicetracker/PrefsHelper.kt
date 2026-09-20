@@ -31,9 +31,9 @@ class PrefsHelper(context: Context) {
         val lat = prefs.getString("LAST_LAT", null)
         val lng = prefs.getString("LAST_LNG", null)
         return if (lat != null && lng != null) {
-            "📍 [Angalia Ramani](https://maps.google.com/?q=$lat,$lng)"
+            "📍 [Check On Map](https://maps.google.com/?q=$lat,$lng)"
         } else {
-            "📍 Location haipatikani bado"
+            "📍 Location Not Found"
         }
     }
 
@@ -41,7 +41,7 @@ class PrefsHelper(context: Context) {
     fun saveCallState(state: String) = prefs.edit().putString("CALL_STATE", state).apply()
     fun getCallState(): String = prefs.getString("CALL_STATE", "IDLE") ?: "IDLE"
 
-    // ===== Betri - kuzuia arifa nyingi =====
+    // ===== Betri - kuzuia Tarifa nyingi =====
     fun setLowBatteryAlertSent(sent: Boolean) = prefs.edit().putBoolean("LOW_BAT_SENT", sent).apply()
     fun isLowBatteryAlertSent(): Boolean = prefs.getBoolean("LOW_BAT_SENT", false)
 }

@@ -10,7 +10,7 @@ import java.net.URL
 object TelegramHelper {
 
     /**
-     * Tuma ujumbe kwenye Telegram bot.
+     * Tuma txt kwenye Telegram bot.
      * Inarudisha true kama imefanikiwa, false kama imeshindwa.
      */
     suspend fun sendMessage(

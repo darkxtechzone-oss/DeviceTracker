@@ -13,9 +13,9 @@ class BootReceiver : BroadcastReceiver() {
 
         val prefs = PrefsHelper(context)
 
-        // Anzisha upya service kama ilikuwa imewashwa kabla ya reboot
+        
         if (prefs.getToken().isNotEmpty() && prefs.getChatId().isNotEmpty() && prefs.isServiceRunning()) {
-            Log.d("BootReceiver", "Kuanza upya MonitorService baada ya reboot...")
+            Log.d("BootReceiver", "Re start MonitorService baada ya reboot...")
 
             val serviceIntent = Intent(context, MonitorService::class.java)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
